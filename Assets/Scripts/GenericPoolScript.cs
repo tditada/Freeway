@@ -4,16 +4,11 @@ using System.Collections.Generic;
 
 public class GenericPoolScript : MonoBehaviour {
 
-	public static GenericPoolScript singlePool;
 	public GameObject pooledObject;
-	public float pooledAmount = 10f;
+	public float pooledAmount=5;
 	public bool willGrow = true;
 
 	List<GameObject> pooledObjects;
-
-	void Awake(){
-		singlePool = this;
-	}
 
 	void Start () {
 		pooledObjects = new List<GameObject> ();
