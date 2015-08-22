@@ -4,22 +4,32 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
-	public Text scoreText;
-	public int score;
+	public Text scoreTextPlayerOne;
+	public Text scoreTextPlayerTwo;
+	public int scorePlayerOne;
+	public int scorePlayerTwo;
 	public GameController current;
 
 	void Start () {
 		current = this;
-		score = 0;
+		scorePlayerOne = 0;
+		scorePlayerTwo = 0;
 		UpdateScore ();
 	}
 
-	public void AddScore(int newScore){
-		score += newScore;
+	public void AddScore(int newScore, int player){
+		if (player == 1) {
+			scorePlayerOne += newScore;
+		} else if (player == 2) {
+			scorePlayerTwo += newScore;
+		} else {
+			Debug.Log ("wrong player");
+		}
 		UpdateScore ();
 	}
 
 	void UpdateScore () {
-		scoreText.text = "Score: " + score;
+		scoreTextPlayerOne.text = "Score: " + scorePlayerOne;
+		scoreTextPlayerTwo.text = "Score: " + scorePlayerTwo;
 	}
 }

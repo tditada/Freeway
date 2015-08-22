@@ -6,12 +6,22 @@ public class YBoundary{
 	public float yMin, yMax;
 }
 
+[System.Serializable]
+public class Players{
+	public int player1, player2;
+}
+
 public class PlayerScript : MonoBehaviour {
 
 	public float speed = 100;
 	public float step = 0.07f;
-	public float offset = 0.01f;
+	public float offset = 0.4f;
 	public int addScore = 1;
+	public string upKey = "up";
+	public string downKey = "down";
+	public int player;
+
+	public Players players;
 	public YBoundary yBoundary;
 	GameController gameController;
 
@@ -27,19 +37,19 @@ public class PlayerScript : MonoBehaviour {
 
 	void Update(){
 		if (transform.position.y >= yBoundary.yMax-offset) {
-			gameController.current.AddScore(addScore);
+			gameController.current.AddScore(addScore, player);
 			MoveToStart ();
 		}
 	}
 
 	void FixedUpdate () {
 
-		if (Input.GetKey ("up")) {
+		if (Input.GetKey (upKey)) {
 			if(!(transform.position.y+step > yBoundary.yMax)){
 				transform.Translate (0,step,0);
 			}
 
-		}else if (Input.GetKey("down")){
+		}else if (Input.GetKey(downKey)){
 			if(!(transform.position.y-step < yBoundary.yMin)){
 				transform.Translate (0,(-1)*step,0);
 			}
@@ -52,7 +62,12 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	void MoveToStart(){
-		this.transform.position = new Vector2 (0,yBoundary.yMin);
+		if (player == players.player1) {
+			this.transform.position = new Vector2 (3.5f, yBoundary.yMin);
+		} else if (player == players.player2) {
+			this.transform.position = new Vector2 (-3.5f, yBoundary.yMin);
+		}
+
 	}
 	
 }
