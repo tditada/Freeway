@@ -2,22 +2,23 @@
 using System.Collections;
 
 public class FireCars : MonoBehaviour {
-	public float fireTime = 60f;
+
+	public float fireTime = 1f;
+	public GenericPoolScript pool;
 
 	void Start () {
-		//InvokeRepeating ("Fire", fireTime, fireTime);
+		pool = this.GetComponent<GenericPoolScript> ();
+		InvokeRepeating ("Fire", fireTime, fireTime);
 	}
 
-	public void Fire (GenericPoolScript pool) {
-		//GenericPoolScript pool = new GenericPoolScript();
+	public void Fire () {
 		GameObject obj = pool.getPooledObject ();
-
 		if (obj == null)
 			return;
 
 		obj.transform.position = transform.position;
 		obj.transform.rotation = transform.rotation;
 		obj.SetActive (true);
-
+		
 	}
 }

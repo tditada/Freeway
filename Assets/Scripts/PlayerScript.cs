@@ -8,24 +8,26 @@ public class YBoundary{
 
 public class PlayerScript : MonoBehaviour {
 
-	public float speed;
+	public float speed = 100;
+	public float step = 0.07f;
 	public YBoundary yBoundary;
 
 	void FixedUpdate () {
+
 		if (Input.GetKey ("up")) {
-			if(!(transform.position.y+0.01f > yBoundary.yMax)){
-				transform.Translate (0,0.1f,0);
+			if(!(transform.position.y+step > yBoundary.yMax)){
+				transform.Translate (0,step,0);
 			}
 
 		}else if (Input.GetKey("down")){
-			if(!(transform.position.y-0.01f < yBoundary.yMin)){
-				transform.Translate (0,-0.1f,0);
+			if(!(transform.position.y-step < yBoundary.yMin)){
+				transform.Translate (0,(-1)*step,0);
 			}
 		}
 	}
 
 	void OnCollisionEnter2D(){
-		this.transform.position = new Vector2 (0,-4.5f);
+		this.transform.position = new Vector2 (0,yBoundary.yMin);
 	}
 	
 }
