@@ -9,34 +9,41 @@ public class GameController : MonoBehaviour {
 	public int scorePlayerOne;
 	public int scorePlayerTwo;
 	public int maxTimeInSec;
-	public int game;
+	public int pauseTimeEnd;
 	public GameController current;
+	public GameObject player1;
+	public GameObject player2;
 
 
 	void Start () {
 		current = this;
-		game = 1;
 		scorePlayerOne = 0;
 		scorePlayerTwo = 0;
-		maxTimeInSec = 30;
+		maxTimeInSec = 10;
+		pauseTimeEnd = 3;
 		UpdateScore ();
 	}
+	
 
 	void Update(){
-	/*	if (Time.timeSinceLevelLoad > maxTimeInSec) {
+		float actualTime = Time.timeSinceLevelLoad;
+
+		if(actualTime > (maxTimeInSec + pauseTimeEnd)){
+			Application.LoadLevel(2);
+		}else if (actualTime > maxTimeInSec) {
 			if(scorePlayerOne > scorePlayerTwo){
-				scoreTextPlayerOne.text = "Winner";
+				scoreTextPlayerOne.text = "WINNER";
 				scoreTextPlayerTwo.text = ":(";
 			}else if(scorePlayerTwo > scorePlayerOne){
 				scoreTextPlayerOne.text = ":(";
-				scoreTextPlayerTwo.text = "Winner";
+				scoreTextPlayerTwo.text = "WINNER";
 			}else{
 				scoreTextPlayerOne.text = "DRAW";
 				scoreTextPlayerTwo.text = "DRAW";
 			}
-			//Application.LoadLevel("MainScene");
-
-		}*/
+			player2.SetActive(false);
+			player1.SetActive(false);
+		}
 	}
 
 	public void AddScore(int newScore, int player){
