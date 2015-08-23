@@ -18,12 +18,12 @@ public class GameController : MonoBehaviour {
 		game = 1;
 		scorePlayerOne = 0;
 		scorePlayerTwo = 0;
-		maxTimeInSec = 10;
+		maxTimeInSec = 30;
 		UpdateScore ();
 	}
 
 	void Update(){
-		if (Time.timeSinceLevelLoad > maxTimeInSec) {
+	/*	if (Time.timeSinceLevelLoad > maxTimeInSec) {
 			if(scorePlayerOne > scorePlayerTwo){
 				scoreTextPlayerOne.text = "Winner";
 				scoreTextPlayerTwo.text = ":(";
@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
 			}
 			//Application.LoadLevel("MainScene");
 
-		}
+		}*/
 	}
 
 	public void AddScore(int newScore, int player){

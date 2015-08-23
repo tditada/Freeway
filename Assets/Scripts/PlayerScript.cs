@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
 	public string upKey = "up";
 	public string downKey = "down";
 	public int player;
+	public AudioSource audio;
 
 	public Players players;
 	public YBoundary yBoundary;
@@ -27,6 +28,7 @@ public class PlayerScript : MonoBehaviour {
 
 	void Start(){
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+		audio = this.GetComponent<AudioSource> ();
 		if (gameControllerObject) {
 			gameController = gameControllerObject.GetComponent<GameController>();
 		}
@@ -58,13 +60,14 @@ public class PlayerScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(){
 		MoveToStart ();
+		audio.Play ();
 		//gameController.AddScore ((-1) * addScore);
 	}
 
 	void MoveToStart(){
-		if (player == players.player1) {
+		if (player == players.player2) {
 			this.transform.position = new Vector2 (3.5f, yBoundary.yMin);
-		} else if (player == players.player2) {
+		} else if (player == players.player1) {
 			this.transform.position = new Vector2 (-3.5f, yBoundary.yMin);
 		}
 
