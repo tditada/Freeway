@@ -22,12 +22,10 @@ public class GameController : MonoBehaviour {
 		current = this;
 		scorePlayerOne = 0;
 		scorePlayerTwo = 0;
-		startTimeInSec = 3;
+		startTimeInSec = 6;
 		maxTimeInSec = 60;
 		pauseTimeEnd = 5;
 		UpdateScore ();
-		//player1.SetActive (false);
-		//player2.SetActive (false);
 	}
 	
 
