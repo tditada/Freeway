@@ -6,40 +6,52 @@ public class GameController : MonoBehaviour {
 
 	public Text scoreTextPlayerOne;
 	public Text scoreTextPlayerTwo;
+	public Text winnerText;
 	public int scorePlayerOne;
 	public int scorePlayerTwo;
+	public int startTimeInSec;
 	public int maxTimeInSec;
 	public int pauseTimeEnd;
+	private bool start;
 	public GameController current;
 	public GameObject player1;
 	public GameObject player2;
-
-
+	
 	void Start () {
+		start = false;
 		current = this;
 		scorePlayerOne = 0;
 		scorePlayerTwo = 0;
-		maxTimeInSec = 10;
-		pauseTimeEnd = 3;
+		startTimeInSec = 3;
+		maxTimeInSec = 60;
+		pauseTimeEnd = 5;
 		UpdateScore ();
+		//player1.SetActive (false);
+		//player2.SetActive (false);
 	}
 	
 
 	void Update(){
 		float actualTime = Time.timeSinceLevelLoad;
-
-		if(actualTime > (maxTimeInSec + pauseTimeEnd)){
+		if (!start && actualTime > startTimeInSec) {
+			start=true;
+			player1.SetActive(true);
+			player2.SetActive(true);
+		}else if(actualTime > (maxTimeInSec + pauseTimeEnd)){
 			Application.LoadLevel(2);
 		}else if (actualTime > maxTimeInSec) {
 			if(scorePlayerOne > scorePlayerTwo){
-				scoreTextPlayerOne.text = "WINNER";
+				scoreTextPlayerOne.text = ":)";
 				scoreTextPlayerTwo.text = ":(";
+				winnerText.text="Player 1 wins";
 			}else if(scorePlayerTwo > scorePlayerOne){
 				scoreTextPlayerOne.text = ":(";
-				scoreTextPlayerTwo.text = "WINNER";
+				scoreTextPlayerTwo.text = ":)";
+				winnerText.text="Player 2 wins";
 			}else{
-				scoreTextPlayerOne.text = "DRAW";
-				scoreTextPlayerTwo.text = "DRAW";
+				scoreTextPlayerOne.text = ":|";
+				scoreTextPlayerTwo.text = ":|";
+				winnerText.text="DRAW";
 			}
 			player2.SetActive(false);
 			player1.SetActive(false);
