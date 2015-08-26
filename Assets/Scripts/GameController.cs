@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour {
 		current = this;
 		scorePlayerOne = 0;
 		scorePlayerTwo = 0;
-		startTimeInSec = 1;
 		maxTimeInSec = 60;
 		pauseTimeEnd = 5;
 		UpdateScore ();
@@ -36,7 +35,7 @@ public class GameController : MonoBehaviour {
 			player1.SetActive(true);
 			player2.SetActive(true);
 		}else if(actualTime > (maxTimeInSec + pauseTimeEnd)){
-			Application.LoadLevel(2);
+			Application.LoadLevel(3);
 		}else if (actualTime > maxTimeInSec) {
 			if(scorePlayerOne > scorePlayerTwo){
 				scoreTextPlayerOne.text = ":)";
