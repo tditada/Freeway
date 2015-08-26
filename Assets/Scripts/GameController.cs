@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
 		current = this;
 		scorePlayerOne = 0;
 		scorePlayerTwo = 0;
-		startTimeInSec = 6;
+		startTimeInSec = 1;
 		maxTimeInSec = 60;
 		pauseTimeEnd = 5;
 		UpdateScore ();
