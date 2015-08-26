@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 		scorePlayerTwo = 0;
 		maxTimeInSec = 60;
 		pauseTimeEnd = 5;
+		UpdateScore ();
 		StartCoroutine(Countdown());	
 	}
 
