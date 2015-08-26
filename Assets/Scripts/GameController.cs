@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 
 	public Text scoreTextPlayerOne;
 	public Text scoreTextPlayerTwo;
+	public Text centralText;
 	public Text winnerText;
 	public int scorePlayerOne;
 	public int scorePlayerTwo;
@@ -16,7 +17,8 @@ public class GameController : MonoBehaviour {
 	public GameController current;
 	public GameObject player1;
 	public GameObject player2;
-	
+	bool showCountdown;
+
 	void Start () {
 		start = false;
 		current = this;
@@ -24,16 +26,28 @@ public class GameController : MonoBehaviour {
 		scorePlayerTwo = 0;
 		maxTimeInSec = 60;
 		pauseTimeEnd = 5;
-		UpdateScore ();
+		StartCoroutine(Countdown());	
 	}
-	
+
+	IEnumerator Countdown()
+	{
+		centralText.text = "3";
+		yield return new WaitForSeconds(1);
+		centralText.text = "2";
+		yield return new WaitForSeconds(1);
+		centralText.text = "1";
+		yield return new WaitForSeconds(1);
+		centralText.text = "Go!!!";
+		yield return new WaitForSeconds(1);
+		centralText.text = "";
+	}
 
 	void Update(){
 		float actualTime = Time.timeSinceLevelLoad;
 		if (!start && actualTime > startTimeInSec) {
-			start=true;
-			player1.SetActive(true);
-			player2.SetActive(true);
+			start = true;
+			player1.SetActive (true);
+			player2.SetActive (true);
 		}else if(actualTime > (maxTimeInSec + pauseTimeEnd)){
 			Application.LoadLevel(3);
 		}else if (actualTime > maxTimeInSec) {
